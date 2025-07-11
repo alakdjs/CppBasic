@@ -3,7 +3,6 @@
 using namespace std;
 
 // Á¤Àû¸â¹ö
-
 class Monster {
 private:
     string _name;

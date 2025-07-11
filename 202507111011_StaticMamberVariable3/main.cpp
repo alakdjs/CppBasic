@@ -22,7 +22,7 @@ public:
 
     }
 
-    ~Monster() {   // 社瑚切
+    ~Monster() {  // 社瑚切
         MonsterCount--;
     }
 
