@@ -7,7 +7,12 @@ using namespace std;
 // 일반화, 특수화
 
 // 동물 육성 시뮬레이션 게임
-// 소, 돼지, 닭
+// 소, 돼지, 닭, 양, 고양이(추가)
+
+// 1. 재사용성
+// 2. 유지보수성
+// 3. 확장성
+// 4. 다형성에 기반구조를 제공
 
 class Stock {
 private:
@@ -26,7 +31,7 @@ public:
     }
 
     void Speak() {
-        cout << _name << "이 음메합니다." << endl;
+        cout << _name << "이 말합니다." << endl;
     }
 
     void Run() {
@@ -67,12 +72,20 @@ public:
         : Stock(name, weight, height, health) {
     }
 
+    void Speak() {
+        cout << GetName() << "가 음매합니다." << endl;
+    }
+
 };
 
 class Pig : public Stock {
 public:
     Pig(string name, float weight, float height, float health)
         : Stock(name, weight, height, health) {
+    }
+
+    void Speak() {
+        cout << GetName() << "가 꿀꿀합니다." << endl;
     }
 
 };
@@ -90,6 +103,19 @@ public:
         : Stock(name, weight, height, health), _isFly(isFly) {
     }
 
+    void Speak() {
+        cout << GetName() << "이 꼬끼오 합니다." << endl;
+    }
+
+    void Run() {
+        if (_isFly) {
+            Fly();
+        }
+        else {
+            Stock::Run();
+        }
+    }
+
 
     void Info() {
         Stock::Info();
@@ -105,23 +131,102 @@ public:
 
 };
 
+class Sheep : public Stock {
+private:
+    int _type;   // 0: 털을 제공하는 양, 1: 고기를 제공하는 양
+
+public:
+    Sheep(string name, float weight, float height, float health, int type)
+        : Stock(name, weight, height, health), _type(type)
+    {
+
+    }
+
+    void Speak() {
+        cout << GetName() << "이 음메에에합니다." << endl;
+    }
+
+    void Info() {
+        Stock::Info();
+
+        switch (_type) {
+        case 0:
+            cout << "종류: 털양" << endl;
+            break;
+
+        case 1:
+            cout << "종류: 고기양" << endl;
+            break;
+
+        default:
+            cout << "종류: 미확인" << endl;
+            break;
+        }
+    }
+};
+
+class Cat : public Stock {
+private:
+    int _color;
+
+public:
+    Cat(string name, float weight, float height, float health, int color)
+        : Stock(name, weight, height, health), _color(color) {
+    }
+
+    void Speak() {
+        cout << GetName() << "가 야옹합니다." << endl;
+    }
+
+    void Info() {
+        Stock::Info();
+
+        switch (_color) {
+        case 0:
+            cout << "종류: 삼색고양이" << endl;
+            break;
+
+        case 1:
+            cout << "종류: 검은고양이" << endl;
+            break;
+
+        case 2:
+            cout << "종류: 치즈고양이" << endl;
+            break;
+
+        default:
+            cout << "종류: 미확인" << endl;
+            break;
+        }
+    }
+};
+
 int main() {
 
     Cow cow("소", 230.0f, 200.0f, 81.0f);
     Pig pig("돼지", 190.0f, 160.0f, 75.0f);
     Chicken flyChicken("나는 닭", 4.0f, 40.0f, 60.0f, true);
     Chicken notFlyChicken("못나는 닭", 3.8f, 40.0f, 60.0f, false);
+    Sheep purSheep("털 양", 100.0f, 110.0f, 80.0f, 0);
+    Sheep beefSheep("고기 양", 120.0f, 120.0f, 70.0f, 1);
+    Cat cat("고양이", 6.0f, 70.0f, 90.0f, 1);
 
     cow.Speak();
     pig.Speak();
     flyChicken.Speak();
     notFlyChicken.Speak();
+    purSheep.Speak();
+    beefSheep.Speak();
+    cat.Speak();
 
     cout << endl;
     cow.Run();
     pig.Run();
     flyChicken.Run();
     notFlyChicken.Run();
+    purSheep.Run();
+    beefSheep.Run();
+    cat.Run();
 
     cout << endl;
     cow.Info();
@@ -131,6 +236,12 @@ int main() {
     flyChicken.Info();
     cout << endl;
     notFlyChicken.Info();
+    cout << endl;
+    purSheep.Info();
+    cout << endl;
+    beefSheep.Info();
+    cout << endl;
+    cat.Info();
 
 
     return 0;
