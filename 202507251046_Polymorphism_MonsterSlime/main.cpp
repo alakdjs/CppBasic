@@ -15,7 +15,7 @@ int main() {
 	Ogre ogreB("ogreB", 48, 11, 9);
 
 	Slime slimeA("slimeA", 30, 5, 5, 8);
-	Slime slimeB("SlimeB", 28, 8, 7, 10);
+	Slime slimeB("slimeB", 28, 8, 7, 10);
 
 	dragonA.Attack(dragonB);
 
