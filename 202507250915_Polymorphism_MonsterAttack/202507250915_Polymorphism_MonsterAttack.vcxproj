@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="dragon.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Ogre.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dragon.h" />
