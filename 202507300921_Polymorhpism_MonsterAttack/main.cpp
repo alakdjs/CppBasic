@@ -59,10 +59,12 @@ int main() {
 
 	dragonA.Attack(golemA);
 	golemA.Info();
+
 	cout << endl;
 
 	ogreA.Attack(snakeA);
-	cout << endl;
+
+	//Monster a;
 
 
 	return 0;

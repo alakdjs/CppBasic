@@ -5,4 +5,6 @@
 class Ogre : public Monster {
 public:
 	Ogre(std::string name, int health, int attack, int defense);
+
+	void GetDamage(int attack) override;
 };

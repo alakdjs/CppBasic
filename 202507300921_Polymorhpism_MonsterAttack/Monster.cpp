@@ -12,15 +12,6 @@ string Monster::GetName() {
 	return _name;
 }
 
-void Monster::GetDamage(int attack) {
-	int damage = attack - _defense;
-
-	if (damage <= 0)
-		damage = 0;
-
-	_health -= damage;
-}
-
 int Monster::GetDefense() {
 	return _defense;
 }
