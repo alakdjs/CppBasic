@@ -26,8 +26,25 @@ public:
 
 class GradeAscending : public Sort {
 public:
-    bool operator()(Student& left, Student& right) override {
-        return left._grade > right._grade;
+    bool operator()(Student& left, Student& right) {
+        if (left._grade > right._grade) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+};
+
+class GradeDecending : public Sort {
+public:
+    bool operator()(Student& left, Student& right) {
+        if (left._grade < right._grade) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 };
 
@@ -42,6 +59,8 @@ public:
     {
         _parr = new Student[_size];
     }
+
+    /* // 직접 구현한거
     DynamicArray(Student* parr, int size)
         : _size(size)
     {
@@ -50,6 +69,7 @@ public:
             _parr[i] = parr[i];
         }
     }
+    */
 
     ~DynamicArray() {
         delete[] _parr;
@@ -67,7 +87,9 @@ public:
     void Sort(Sort& comp) {
         for (int i = 0; i < _size - 1; i++) {
             for (int j = 0; j < _size - (i + 1); j++) {
-                if (comp(_parr[j], _parr[j + 1])) {
+                //if (comp(_parr[j], _parr[j + 1])) {
+                if (comp.operator()(_parr[j], _parr[j + 1])) {
+
                     Student temp = _parr[j];
                     _parr[j] = _parr[j + 1];
                     _parr[j + 1] = temp;
@@ -99,16 +121,16 @@ void InputStudent(Student& ref) {
 }
 
 void PrintStudent(Student& ref) {
-    cout << "이름: " << ref._name << endl;
-    cout << "학년: " << ref._grade << endl;
-    cout << "반: " << ref._classNum << endl;
-    cout << endl;
+    cout << "이름: " << ref._name << ", 학년: " << ref._grade << ", 반: " << ref._classNum << endl;
 }
 
 int main() {
     srand(time(NULL));  // 현재 시간으로 랜덤 씨드값 생성
     DynamicArray array(30);
     Student starray[30];
+
+    GradeAscending ascend;
+    GradeDecending decend;
 
     int length = sizeof(starray) / sizeof(starray[0]);
 
@@ -127,15 +149,20 @@ int main() {
     for (int i = 0; i < array.GetSize(); i++) {
         array[i] = starray[i];
     }
-    
-    cout << "array = " << array << endl;
-
     cout << endl;
 
-    GradeAscending comp;
-    array.Sort(comp);
+    cout << "array = " << endl << array << endl;
 
-    cout << "grade array = " << array << endl;
+    cout << "오름차순으로 출력" << endl;
+    array.Sort(ascend);
+
+    cout << array << endl;
+
+    cout << endl;
+    cout << "내림차순으로 출력" << endl;
+    array.Sort(decend);
+    cout << array << endl;
+
 
     return 0;
 }
