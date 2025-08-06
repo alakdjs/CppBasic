@@ -38,7 +38,7 @@ public:
 	}
 };
 
-template<>
+template <>
 class DynamicArray<float*> {
 private:
 	int _size;
@@ -55,7 +55,7 @@ ostream& operator<<(ostream& o, DynamicArray<T>& right) {
 }
 
 // 템플릿 특수화
-template<>
+template <>
 ostream& operator<<(ostream& o, DynamicArray<Student>& right) {
 	for (int i = 0; i < right.GetSizze(); i++) {
 		o << "나이: " << right[i].age << ", 학년: " 
