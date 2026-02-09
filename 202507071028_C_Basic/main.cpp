@@ -32,7 +32,5 @@ int main() {
     // 변수명의 길이는 표준 C 31문자, visual studio 128문자 가능.
 
 
-
-
     return 0;
 }
